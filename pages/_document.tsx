@@ -1,4 +1,12 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { styled } from '@mui/material/styles';
+
+const Body = styled('body')(({}) => ({
+  margin: 0,
+  padding: 0,
+  boxSizing: 'border-box',
+  backgroundColor: '#95ded7',
+}));
 
 export default function Document() {
   return (
@@ -15,10 +23,10 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="bg-gray-900 bg-app bg-no-repeat bg-cover">
+      <Body>
         <Main />
         <NextScript />
-      </body>
+      </Body>
     </Html>
   );
 }
