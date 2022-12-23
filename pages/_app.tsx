@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import '../styles/global.css';
 
 const theme = createTheme({
   typography: {
