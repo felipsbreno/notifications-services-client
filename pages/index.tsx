@@ -1,15 +1,29 @@
+import React from 'react';
 import { Add } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  Typography,
-  Grid,
-  Paper,
-  Container,
-  Button,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+
+interface HeaderActionsProps {
+  onOpenForm?: () => void;
+}
+
+interface DialogActionsProps {
+  open?: boolean;
+  handleClose?: () => void;
+}
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,13 +49,20 @@ const ButtonToCreateNotification = styled(Button)(({}) => ({
 }));
 
 export default function Home() {
+  const [openDialog, setOpenDialog] = React.useState(false);
+
+  const openDialogForm = () => setOpenDialog(!openDialog);
+  const closeDialogForm = () => setOpenDialog(false);
+
   return (
     <>
-      <HeaderApp />
+      <HeaderApp onOpenForm={openDialogForm} />
 
       <Wrapper>
         <CardNotificationRender />
       </Wrapper>
+
+      <DialogComponent open={openDialog} handleClose={closeDialogForm} />
     </>
   );
 }
@@ -61,7 +82,7 @@ const CardNotificationRender = () => (
   </Container>
 );
 
-const HeaderApp = () => (
+const HeaderApp = (props: HeaderActionsProps) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static" color="inherit">
       <Toolbar>
@@ -73,6 +94,7 @@ const HeaderApp = () => (
           aria-label="Criar um notificação"
           size="large"
           color="inherit"
+          onClick={props.onOpenForm}
         >
           <Add />
           <Typography variant="h6" component="span">
@@ -84,4 +106,26 @@ const HeaderApp = () => (
   </Box>
 );
 
-const FormCreateNotification = () => {};
+const DialogComponent = (props: DialogActionsProps) => (
+  <Dialog open={Boolean(props.open)} onClose={props.handleClose}>
+    <DialogTitle>Subscribe</DialogTitle>
+    <DialogContent>
+      <DialogContentText>
+        To subscribe to this website, please enter your email address here. We
+        will send updates occasionally.
+      </DialogContentText>
+      <TextField
+        autoFocus
+        margin="dense"
+        id="name"
+        label="Email Address"
+        type="email"
+        fullWidth
+        variant="standard"
+      />
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={props.handleClose}>Fechar</Button>
+    </DialogActions>
+  </Dialog>
+);

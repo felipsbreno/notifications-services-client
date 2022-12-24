@@ -1,11 +1,7 @@
 import type { AppProps } from 'next/app';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Roboto, sans-serif',
-  },
-});
+const theme = createTheme({});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
