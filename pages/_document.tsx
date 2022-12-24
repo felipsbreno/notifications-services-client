@@ -6,6 +6,7 @@ const Body = styled('body')(({}) => ({
   padding: 0,
   boxSizing: 'border-box',
   backgroundColor: '#95ded7',
+  fontFamily: 'Roboto, sans-serif',
 }));
 
 export default function Document() {

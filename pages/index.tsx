@@ -5,7 +5,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
   Grid,
   Paper,
   Container,
@@ -52,12 +51,10 @@ const CardNotificationRender = () => (
     <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
-          <Item>Total de Notificações: </Item>
-          <Item>400</Item>
+          <Item>Total de Notificações: 400</Item>
         </Grid>
         <Grid item xs={6}>
-          <Item>Total de Notificações Criadas: </Item>
-          <Item>100</Item>
+          <Item>Total de Notificações Criadas: 100</Item>
         </Grid>
       </Grid>
     </Box>
@@ -79,7 +76,7 @@ const HeaderApp = () => (
         >
           <Add />
           <Typography variant="h6" component="span">
-            Criar uma notificação
+            Criar
           </Typography>
         </ButtonToCreateNotification>
       </Toolbar>
