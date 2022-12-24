@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Add } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -106,26 +106,64 @@ const HeaderApp = (props: HeaderActionsProps) => (
   </Box>
 );
 
-const DialogComponent = (props: DialogActionsProps) => (
-  <Dialog open={Boolean(props.open)} onClose={props.handleClose}>
-    <DialogTitle>Subscribe</DialogTitle>
-    <DialogContent>
-      <DialogContentText>
-        To subscribe to this website, please enter your email address here. We
-        will send updates occasionally.
-      </DialogContentText>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="name"
-        label="Email Address"
-        type="email"
-        fullWidth
-        variant="standard"
-      />
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={props.handleClose}>Fechar</Button>
-    </DialogActions>
-  </Dialog>
-);
+const DialogComponent = (props: DialogActionsProps) => {
+  const [content, setContent] = React.useState('');
+  const [category, setCategory] = React.useState('');
+
+  const handleSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+  };
+
+  return (
+    <Dialog open={Boolean(props.open)} onClose={props.handleClose}>
+      <DialogTitle>Vamos criar uma notificação ?</DialogTitle>
+      <DialogContent>
+        <DialogContentText sx={{ color: '#000', marginBottom: 2 }}>
+          Para criar um notificação, insira os dados abaixo.
+        </DialogContentText>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="content"
+            label="Content"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="category"
+            label="Category"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="recipientId"
+            label="RecipientId"
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+
+          <DialogActions>
+            <Button type="submit" fullWidth color="primary">
+              Enviar
+            </Button>
+            <Button onClick={props.handleClose} fullWidth>
+              Fechar
+            </Button>
+          </DialogActions>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+};
