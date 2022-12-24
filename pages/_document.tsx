@@ -1,13 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { styled } from '@mui/material/styles';
-
-const Body = styled('body')(({}) => ({
-  margin: 0,
-  padding: 0,
-  boxSizing: 'border-box',
-  backgroundColor: '#95ded7',
-  fontFamily: 'Roboto, sans-serif',
-}));
+import { Body } from '../styles/style';
 
 export default function Document() {
   return (

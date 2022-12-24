@@ -1,12 +1,10 @@
 import React, { FormEvent } from 'react';
 import { Add } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -16,6 +14,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 
+import { ButtonToCreateNotification, Item, Wrapper } from '../styles/style';
+
 interface HeaderActionsProps {
   onOpenForm?: () => void;
 }
@@ -24,29 +24,6 @@ interface DialogActionsProps {
   open?: boolean;
   handleClose?: () => void;
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.primary,
-  fontSize: 24,
-}));
-
-const Wrapper = styled('div')(({}) => ({
-  marginTop: 60,
-}));
-
-const ButtonToCreateNotification = styled(Button)(({}) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-
-  span: {
-    fontSize: 16,
-  },
-}));
 
 export default function Home() {
   const [openDialog, setOpenDialog] = React.useState(false);
