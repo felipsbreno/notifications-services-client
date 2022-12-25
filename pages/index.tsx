@@ -63,20 +63,23 @@ const HeaderApp = ({ onOpenForm }: HeaderActionsProps) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static" color="inherit">
       <Toolbar>
-        <Typography variant="h6" color="deeppink" component="div" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          color="deeppink"
+          component="div"
+          sx={{ flexGrow: 1 }}
+        >
           Gerenciar Notificações
         </Typography>
 
         <ButtonToCreateNotification
           aria-label="Criar um notificação"
-          size="small"
+          size="medium"
           variant="contained"
           onClick={onOpenForm}
         >
           <Add />
-          <Typography variant="h6" component="span">
-            Criar
-          </Typography>
+          Criar Notificação
         </ButtonToCreateNotification>
       </Toolbar>
     </AppBar>
@@ -134,7 +137,12 @@ const DialogComponent = (props: DialogActionsProps) => {
             <Button fullWidth type="submit" variant="contained" color="success">
               Enviar
             </Button>
-            <Button fullWidth variant="contained" onClick={handleClose} color="error">
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={handleClose}
+              color="error"
+            >
               Fechar
             </Button>
           </DialogActions>
