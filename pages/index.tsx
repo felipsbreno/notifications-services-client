@@ -13,9 +13,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import FormContainer from '../components/FormContainer';
+import TextField from '../components/TextField';
 
 import { ButtonToCreateNotification, Item, Wrapper } from '../styles/style';
 
@@ -93,11 +93,11 @@ const DialogComponent = (props: DialogActionsProps) => {
   const [recipientId, setRecipientId] = useState('');
 
   const generateUUID = () => {
-    setRecipientId(uuidV4());
+    setRecipientId && setRecipientId(uuidV4());
   };
 
   const cleanupUUID = () => {
-    setRecipientId('');
+    setRecipientId && setRecipientId('');
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -113,45 +113,23 @@ const DialogComponent = (props: DialogActionsProps) => {
         </DialogContentText>
         <FormContainer handleSubmit={handleSubmit}>
           <TextField
-            autoFocus
-            margin="dense"
             id="content"
             label="Content"
-            type="text"
-            fullWidth
-            variant="outlined"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
           <TextField
-            autoFocus
-            margin="dense"
             id="category"
             label="Category"
-            type="text"
-            fullWidth
-            variant="outlined"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           />
           <TextField
-            autoFocus
-            margin="dense"
             id="recipientId"
             label="RecipientId"
-            type="text"
-            fullWidth
-            variant="outlined"
             value={recipientId}
-            InputProps={{
-              endAdornment: (
-                <Button onClick={cleanupUUID}>
-                  <Tooltip title={'Limpar UUID'}>
-                    <FormatPaint />
-                  </Tooltip>
-                </Button>
-              ),
-            }}
+            hasEndAdornment
+            cleanupUUID={cleanupUUID}
           />
           <Button onClick={generateUUID}>Gerar UUID</Button>
 
