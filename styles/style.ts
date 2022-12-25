@@ -5,7 +5,7 @@ export const Body = styled('body')(({}) => ({
   margin: 0,
   padding: 0,
   boxSizing: 'border-box',
-  backgroundColor: '#95ded7',
+  backgroundColor: '#B3E5FC',
   fontFamily: 'Roboto, sans-serif',
 }));
 
