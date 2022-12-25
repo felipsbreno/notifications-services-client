@@ -1,6 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, Fragment } from 'react';
 import { v4 as uuidV4 } from 'uuid';
-import { Add, FormatPaint } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Tooltip from '@mui/material/Tooltip';
 import FormContainer from '../components/FormContainer';
 import TextField from '../components/TextField';
 
@@ -35,15 +34,13 @@ export default function Home() {
   const closeDialogForm = () => setOpenDialog(false);
 
   return (
-    <>
+    <Fragment>
       <HeaderApp onOpenForm={openDialogForm} />
-
       <Wrapper>
         <CardNotificationRender />
       </Wrapper>
-
       <DialogComponent open={openDialog} handleClose={closeDialogForm} />
-    </>
+    </Fragment>
   );
 }
 
@@ -72,8 +69,8 @@ const HeaderApp = ({ onOpenForm }: HeaderActionsProps) => (
 
         <ButtonToCreateNotification
           aria-label="Criar um notificação"
-          size="large"
-          color="inherit"
+          size="small"
+          variant="contained"
           onClick={onOpenForm}
         >
           <Add />
@@ -134,10 +131,10 @@ const DialogComponent = (props: DialogActionsProps) => {
           <Button onClick={generateUUID}>Gerar UUID</Button>
 
           <DialogActions>
-            <Button type="submit" fullWidth color="primary">
+            <Button fullWidth type="submit" variant="contained" color="success">
               Enviar
             </Button>
-            <Button onClick={handleClose} fullWidth>
+            <Button fullWidth variant="contained" onClick={handleClose} color="error">
               Fechar
             </Button>
           </DialogActions>
