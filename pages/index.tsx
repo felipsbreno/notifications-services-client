@@ -1,5 +1,6 @@
-import React, { FormEvent } from 'react';
-import { Add } from '@mui/icons-material';
+import { FormEvent, useState } from 'react';
+import { v4 as uuidV4 } from 'uuid';
+import { Add, FormatPaint } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +14,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
+import FormContainer from '../components/FormContainer';
 
 import { ButtonToCreateNotification, Item, Wrapper } from '../styles/style';
 
@@ -26,9 +29,9 @@ interface DialogActionsProps {
 }
 
 export default function Home() {
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const openDialogForm = () => setOpenDialog(!openDialog);
+  const openDialogForm = () => setOpenDialog(true);
   const closeDialogForm = () => setOpenDialog(false);
 
   return (
@@ -59,7 +62,7 @@ const CardNotificationRender = () => (
   </Container>
 );
 
-const HeaderApp = (props: HeaderActionsProps) => (
+const HeaderApp = ({ onOpenForm }: HeaderActionsProps) => (
   <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static" color="inherit">
       <Toolbar>
@@ -71,7 +74,7 @@ const HeaderApp = (props: HeaderActionsProps) => (
           aria-label="Criar um notificação"
           size="large"
           color="inherit"
-          onClick={props.onOpenForm}
+          onClick={onOpenForm}
         >
           <Add />
           <Typography variant="h6" component="span">
@@ -84,21 +87,31 @@ const HeaderApp = (props: HeaderActionsProps) => (
 );
 
 const DialogComponent = (props: DialogActionsProps) => {
-  const [content, setContent] = React.useState('');
-  const [category, setCategory] = React.useState('');
+  const { open, handleClose } = props;
+  const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
+  const [recipientId, setRecipientId] = useState('');
 
-  const handleSubmit = (evt: FormEvent) => {
-    evt.preventDefault();
+  const generateUUID = () => {
+    setRecipientId(uuidV4());
+  };
+
+  const cleanupUUID = () => {
+    setRecipientId('');
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
   };
 
   return (
-    <Dialog open={Boolean(props.open)} onClose={props.handleClose}>
+    <Dialog open={Boolean(open)} onClose={handleClose}>
       <DialogTitle>Vamos criar uma notificação ?</DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ color: '#000', marginBottom: 2 }}>
           Para criar um notificação, insira os dados abaixo.
         </DialogContentText>
-        <form onSubmit={handleSubmit}>
+        <FormContainer handleSubmit={handleSubmit}>
           <TextField
             autoFocus
             margin="dense"
@@ -129,17 +142,28 @@ const DialogComponent = (props: DialogActionsProps) => {
             type="text"
             fullWidth
             variant="outlined"
+            value={recipientId}
+            InputProps={{
+              endAdornment: (
+                <Button onClick={cleanupUUID}>
+                  <Tooltip title={'Limpar UUID'}>
+                    <FormatPaint />
+                  </Tooltip>
+                </Button>
+              ),
+            }}
           />
+          <Button onClick={generateUUID}>Gerar UUID</Button>
 
           <DialogActions>
             <Button type="submit" fullWidth color="primary">
               Enviar
             </Button>
-            <Button onClick={props.handleClose} fullWidth>
+            <Button onClick={handleClose} fullWidth>
               Fechar
             </Button>
           </DialogActions>
-        </form>
+        </FormContainer>
       </DialogContent>
     </Dialog>
   );
