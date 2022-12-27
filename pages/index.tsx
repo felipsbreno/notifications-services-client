@@ -13,10 +13,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+
 import FormContainer from '../components/FormContainer';
 import TextField from '../components/TextField';
 
 import { ButtonToCreateNotification, Item, Wrapper } from '../styles/style';
+import { GetStaticProps } from 'next';
 
 interface HeaderActionsProps {
   onOpenForm?: () => void;
@@ -150,4 +152,10 @@ const DialogComponent = (props: DialogActionsProps) => {
       </DialogContent>
     </Dialog>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
